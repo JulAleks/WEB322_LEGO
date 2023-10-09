@@ -29,34 +29,18 @@ legoData
     res.status(404).send("No LEGO for YOU!");
   });
 
-
-
-//display all legos
-app.get("/lego/sets", (req, res) => {
-  legoData
-    .getAllSets()
-    .then((sets) => {
-      res.send(sets);
-      console.log("Showing all LEGO sets");
-    })
-    .catch((error) => {
-      console.error("No LEGO for YOU!", error.message);
-      res.status(404).send("No LEGO for YOU!");
-    });
-});
-
 //static files from public dir
 app.use(express.static("public"));
 
-//Show home
-app.get("/views/home.html", (req, res) => {
+//HOME
+app.get("/", (req, res) => {
   const filePath = path.join(__dirname, "views", "home.html");
   res.sendFile(filePath, (err) => {
     if (err) {
       console.error("Error sending file:", err);
       res.status(500).send("Internal Server Error");
     } else {
-      console.log("HERE ARE LOGOS");
+      console.log("Serving home.html");
     }
   });
 });
@@ -72,6 +56,20 @@ app.get("/views/about.html", (req, res) => {
       console.log("ALL ABOUT ME");
     }
   });
+});
+
+//display all legos
+app.get("/lego/sets", (req, res) => {
+  legoData
+    .getAllSets()
+    .then((sets) => {
+      res.send(sets);
+      console.log("Showing all LEGO sets");
+    })
+    .catch((error) => {
+      console.error("No LEGO for YOU!", error.message);
+      res.status(404).send("No LEGO for YOU!");
+    });
 });
 
 //display sets by search
