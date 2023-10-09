@@ -29,11 +29,6 @@ legoData
     res.status(404).send("No LEGO for YOU!");
   });
 
-//display my name
-app.get("/", (req, res) => {
-  res.send("Assignment 2:  Julia Alekseev - 051292134");
-  console.log("Showing my Name");
-});
 
 //display all legos
 app.get("/lego/sets", (req, res) => {
