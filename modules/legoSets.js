@@ -1,5 +1,5 @@
 /********************************************************************************
- * WEB322 – Assignment 02
+ * WEB322 – Assignment 04
  *
  * I declare that this assignment is my own work in accordance with Seneca's
  * Academic Integrity Policy:
@@ -8,7 +8,6 @@
  *
  * Name: Julia Alekseev Student ID: 051292134 Date: Oct 10, 2023
  *
- * Published URL: https://dull-red-lovebird-shoe.cyclic.app/
  ********************************************************************************/
 
 // sets jason
