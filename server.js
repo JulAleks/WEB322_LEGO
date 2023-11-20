@@ -29,17 +29,17 @@ app.use(express.urlencoded({ extended: true }));
 
 ///////////// INIT ALL LEGOS/////////////////////////
 // init LEGO data
+let legoDataInitialized = false;
+
 legoData
   .initialize()
   .then(() => {
     console.log("LEGO data initialized!");
+    legoDataInitialized = true;
   })
   .catch((error) => {
-    console.error("No LEGO for YOU!", error.message);
-    res.status(404).render("404", {
-      message:
-        "Apologies, but it seems the raccoons have orchestrated a LEGO heist, leaving your digital bricks in the paws of mischief, rendering initialization impossible - those crafty bandits are building their own raccoon metropolis! ",
-    });
+    console.error("Error initializing LEGO data:", error.message);
+    // You can log the error or handle it as needed
   });
 
 ///////PAGES////////////
