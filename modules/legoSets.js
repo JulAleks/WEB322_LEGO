@@ -92,7 +92,7 @@ module.exports.initialize = () => {
 // fill the sets
 module.exports.getAllSets = () => {
   return Set.findAll({
-    include: [{ model: Theme, attributes: ["name"] }],
+    include: [{ model: Theme, attributes: ["id", "name"] }],
     raw: true,
   })
     .then((setsFromDatabase) => {
@@ -119,7 +119,7 @@ module.exports.getSetByNum = (setNum) => {
     });
 };
 
-// Returns sets by theme
+// find set by theme
 module.exports.getSetsByTheme = (theme) => {
   return Set.findAll({
     include: [
@@ -141,5 +141,79 @@ module.exports.getSetsByTheme = (theme) => {
     })
     .catch((err) => {
       return Promise.reject(err);
+    });
+};
+
+// funct to find themes
+module.exports.getThemes = () => {
+  return Theme.findAll({
+    attributes: ["id", "name"],
+    raw: true,
+  })
+    .then((themesFromDatabase) => {
+      return Promise.resolve(themesFromDatabase);
+    })
+    .catch((err) => {
+      return Promise.reject(err);
+    });
+};
+
+//get teams to add set
+module.exports.getAllThemes = () => {
+  return Set.findAll({
+    include: [
+      {
+        model: Theme,
+        attributes: ["id", "name"],
+        required: false,
+      },
+    ],
+    raw: true,
+  })
+    .then((themesFromDatabase) => {
+      return Promise.resolve(themesFromDatabase);
+    })
+    .catch((err) => {
+      return Promise.reject(err);
+    });
+};
+
+//post set
+module.exports.addSet = (setData) => {
+  console.log("setData:", setData);
+  return Set.create(setData)
+    .then(() => {
+      return Promise.resolve();
+    })
+    .catch((err) => {
+      return Promise.reject(err.errors[0].message);
+    });
+};
+
+//edit
+module.exports.editSet = (setNum, setData) => {
+  return Set.update(setData, {
+    where: { set_num: setNum },
+  })
+    .then(() => {
+      return Promise.resolve();
+    })
+    .catch((err) => {
+      return Promise.reject(err.errors[0].message);
+    });
+};
+
+//delete
+module.exports.deleteSet = (setNum, setData) => {
+  return Set.destroy({
+    where: { set_num: setNum },
+  })
+    .then(() => {
+      return Promise.resolve();
+    })
+    .catch((err) => {
+      if (err.errors && err.errors.length > 0) {
+        return Promise.reject(err.errors[0].message);
+      }
     });
 };

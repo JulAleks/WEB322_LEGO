@@ -46,7 +46,8 @@
         <span class="font-bold">Number of Parts: </span> <%= set.num_parts %> <br /><br />
         <span id="quote"></span>
         <br /><br />
-        <a class="btn btn-primary btn-sm" href="#" onclick="history.back(); return false;">RETURN</a>
+        <a class="btn btn-success btn-sm" href="#" onclick="location.href='/lego/editSet/<%= set.set_num %> '">EDIT SET: <%= set.name %></a>
+        <a class="btn btn-primary btn-sm" href="#" onclick="history.back(); return false;">RETURN</a>   
       </p>
     </div>
   </div>
