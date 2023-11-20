@@ -19,12 +19,11 @@ const legoData = require("./modules/legoSets");
 
 ////////////////MULTER/////////////////////////
 const multer = require("multer");
-const os = require("os");
 
 const storage = multer.diskStorage({
-  destination: os.tmpdir(), // Use the temporary directory
+  destination: "uploads/",
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + Date.now());
+    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
