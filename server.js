@@ -16,19 +16,7 @@ const app = express();
 const path = require("path");
 const HTTP_PORT = 8080;
 const legoData = require("./modules/legoSets");
-require("dotenv").config();
-////////////////MULTER/////////////////////////
-const multer = require("multer");
 
-const storage = multer.diskStorage({
-  destination: "uploads/",
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-
-const upload = multer({ storage: storage });
-app.use(express.urlencoded({ extended: true }));
 ////////////////////////////////////////////////
 
 // set the view engine to EJS
@@ -36,6 +24,8 @@ app.set("view engine", "ejs");
 
 // static files from the public directory
 app.use(express.static("public"));
+
+app.use(express.urlencoded({ extended: true }));
 
 ///////////// INIT ALL LEGOS/////////////////////////
 // init LEGO data
