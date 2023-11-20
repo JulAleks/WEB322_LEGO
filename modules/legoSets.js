@@ -12,19 +12,30 @@
  ********************************************************************************/
 
 // set up sequelize
-const Sequelize = require("sequelize");
+// app.js
+const postgres = require("postgres");
 require("dotenv").config();
 
-// set up sequelize to point to our postgres database
-let sequelize = new Sequelize("web", "JulAleks", "rFu93tiodhNf", {
-  host: "ep-dawn-queen-70040841.us-east-2.aws.neon.tech",
-  dialect: "postgres",
+let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
+
+const sql = postgres({
+  host: PGHOST,
+  database: PGDATABASE,
+  username: PGUSER,
+  password: PGPASSWORD,
   port: 5432,
-  dialectOptions: {
-    ssl: { rejectUnauthorized: false },
+  ssl: "require",
+  connection: {
+    options: `project=${ENDPOINT_ID}`,
   },
-  query: { raw: true },
 });
+
+async function getPgVersion() {
+  const result = await sql`select version()`;
+  console.log(result);
+}
+
+getPgVersion();
 
 // Define a Theme model
 const Theme = sequelize.define(

@@ -16,7 +16,7 @@ const app = express();
 const path = require("path");
 const HTTP_PORT = 8080;
 const legoData = require("./modules/legoSets");
-
+require("dotenv").config();
 ////////////////MULTER/////////////////////////
 const multer = require("multer");
 
