@@ -36,13 +36,10 @@ legoData
   })
   .catch((error) => {
     console.error("No LEGO for YOU!", error.message);
-    // Redirect the user or send a response based on the error
-    if (error.message.includes("raccoons")) {
-      res.status(404).render("404", {
-        message:
-          "Apologies, but it seems the raccoons have orchestrated a LEGO heist, leaving your digital bricks in the paws of mischief, rendering initialization impossible - those crafty bandits are building their own raccoon metropolis!",
-      });
-    }
+    res.status(404).render("404", {
+      message:
+        "Apologies, but it seems the raccoons have orchestrated a LEGO heist, leaving your digital bricks in the paws of mischief, rendering initialization impossible - those crafty bandits are building their own raccoon metropolis! ",
+    });
   });
 
 ///////PAGES////////////
