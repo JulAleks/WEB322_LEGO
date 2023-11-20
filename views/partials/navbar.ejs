@@ -1,32 +1,19 @@
 <%//NAV BAR%>
 
+
+
 <div class="navbar bg-base-100">
   <div class="flex-1">
-    <a
-      class="btn btn-ghost normal-case text-xl <%= (page === '/') ? 'active' : '' %>"
-      href="/"
-      >LEGO Collection</a
-    >
+    <a class="btn btn-ghost normal-case text-xl <%= (page === '/') ? 'active' : '' %>" href="/">LEGO Collection</a>
   </div>
 
   <div class="navbar-center hidden sm:flex">
     <ul class="menu menu-horizontal px-1">
       <li>
-        <a class="<%= (page === 'about') ? 'active' : '' %>" href="/about"
-          >About</a
-        >
+        <a class="<%= (page == "/about") ? 'active' : '' %>" href="/about">About</a>
       </li>
       <li>
-        <a class="<%= (page === 'sets') ? 'active' : '' %>" href="/lego/sets"
-          >View Collection</a
-        >
-      </li>
-      <li>
-        <a
-          class="<%= (page === 'addSet') ? 'active' : '' %>"
-          href="/lego/addSet"
-          >Add LEGO Set</a
-        >
+        <a class="<%= (page == "/sets") ? 'active' : '' %>" href="/lego/sets">View Collection</a>
       </li>
     </ul>
   </div>
