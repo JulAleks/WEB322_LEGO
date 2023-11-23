@@ -25,12 +25,6 @@ app.set("view engine", "ejs");
 // static files from the public directory
 app.use(express.static("public"));
 
-//multer
-const multer = require("multer");
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
-app.use(upload.any()); //for files
 app.use(express.urlencoded({ extended: true })); //for text
 
 ///////////// INIT ALL LEGOS/////////////////////////
@@ -138,7 +132,6 @@ app.get("/lego/addSet", (req, res) => {
 //posting new set
 app.post("/lego/addSet", (req, res) => {
   const setData = req.body;
-  const files = req.files;
 
   legoData
     .addSet(setData)
