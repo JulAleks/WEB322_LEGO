@@ -1,22 +1,21 @@
 /********************************************************************************
- * WEB322 – Assignment 05
+ * WEB322 – Assignment 06
  *
  * I declare that this assignment is my own work in accordance with Seneca's
  * Academic Integrity Policy:
  *
  * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
  *
- * Name: Julia Alekseev Student ID: 051292134 Date: Nov 22, 2023
+ * Name: Julia Alekseev Student ID: 051292134 Date: Nov 26, 2023
  *
  * Published URL: https://dull-red-lovebird-shoe.cyclic.app/
  ********************************************************************************/
-
 const express = require("express");
 const app = express();
-const path = require("path");
 const HTTP_PORT = 8080;
 const legoData = require("./modules/legoSets");
-
+const authData = require("./modules/auth-service");
+const clientSessions = require("client-sessions");
 ////////////////////////////////////////////////
 
 // set the view engine to EJS
@@ -25,14 +24,117 @@ app.set("view engine", "ejs");
 // static files from the public directory
 app.use(express.static("public"));
 
-//multer
-const multer = require("multer");
-const storage = multer.memoryStorage();
-const upload = multer({ storage: storage });
-
-app.use(upload.any()); //for files
 app.use(express.urlencoded({ extended: true })); //for text
 
+/////////////////////////////////////////////////
+//login
+
+app.use(
+  clientSessions({
+    cookieName: "session",
+    secret: "rac00nsRul3Th3World!",
+    duration: 2 * 60 * 1000,
+    activeDuration: 1000 * 60,
+  })
+);
+
+app.use((req, res, next) => {
+  res.locals.session = req.session;
+  next();
+});
+const ensureLogin = (req, res, next) => {
+  if (!req.session.user) {
+    res.redirect("/login");
+  } else {
+    next();
+  }
+};
+
+app.get("/login", (req, res) => {
+  console.log("Login page");
+  res.render("login", {
+    errorMsg: "",
+  });
+});
+
+app.post("/login", (req, res) => {
+  const userName = req.body.userName;
+  const password = req.body.password;
+
+  if (userName === "" || password === "") {
+    res.render("login", {
+      errorMsg: "Missing credentials.",
+    });
+  } else {
+    authData
+      .checkUser({ userName, password })
+      .then((user) => {
+        req.session.user = {
+          userName: user.userName,
+          email: user.email,
+          loginHistory: user.loginHistory,
+        };
+        res.redirect("/lego/sets");
+      })
+      .catch((err) => {
+        res.render("login", {
+          errorMsg: err,
+        });
+      });
+  }
+});
+
+app.get("/logout", (req, res) => {
+  console.log("Logout page");
+  req.session.reset();
+  res.redirect("/login");
+});
+
+//register
+app.get("/register", (req, res) => {
+  console.log("Register page");
+  res.render("register");
+});
+
+app.post("/register", (req, res) => {
+  const userData = {
+    userName: req.body.userName,
+    password: req.body.password,
+    password2: req.body.password2,
+    email: req.body.email,
+  };
+
+  authData
+    .registerUser(userData)
+    .then(() => {
+      res.render("register", {
+        successMessage:
+          "Success! userName birthed into existence like a raccoon discovering a new trash can. Welcome to the digital wilderness!",
+        userName: userData.userName,
+        registrationSuccessful: true, // Set to true for successful registration
+      });
+    })
+    .catch((err) => {
+      res.render("register", {
+        errorMessage: err,
+        userName: userData.userName,
+        registrationSuccessful: false, // Set to false for failed registration
+      });
+    });
+});
+
+//history
+app.get("/userHistory", ensureLogin, (req, res) => {
+  console.log("History page");
+  res.render("userHistory");
+});
+
+app.get("/dashboard", ensureLogin, (req, res) => {
+  console.log("Dashboard page");
+  res.render("dashboard", {
+    user: req.session.user,
+  });
+});
 ///////////// INIT ALL LEGOS/////////////////////////
 // init LEGO data
 legoData
@@ -138,7 +240,6 @@ app.get("/lego/addSet", (req, res) => {
 //posting new set
 app.post("/lego/addSet", (req, res) => {
   const setData = req.body;
-  const files = req.files;
 
   legoData
     .addSet(setData)
