@@ -111,14 +111,14 @@ app.post("/register", (req, res) => {
         successMessage:
           "Success! userName birthed into existence like a raccoon discovering a new trash can. Welcome to the digital wilderness!",
         userName: userData.userName,
-        registrationSuccessful: true, // Set to true for successful registration
+        registrationSuccessful: true,
       });
     })
     .catch((err) => {
       res.render("register", {
         errorMessage: err,
         userName: userData.userName,
-        registrationSuccessful: false, // Set to false for failed registration
+        registrationSuccessful: false,
       });
     });
 });
@@ -129,12 +129,6 @@ app.get("/userHistory", ensureLogin, (req, res) => {
   res.render("userHistory");
 });
 
-app.get("/dashboard", ensureLogin, (req, res) => {
-  console.log("Dashboard page");
-  res.render("dashboard", {
-    user: req.session.user,
-  });
-});
 ///////////// INIT ALL LEGOS/////////////////////////
 // init LEGO data
 legoData
