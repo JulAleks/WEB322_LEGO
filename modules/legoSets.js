@@ -1,20 +1,12 @@
 /********************************************************************************
- * WEB322 – Assignment 05
+ * WEB322 – Assignment 06
  *
  * I declare that this assignment is my own work in accordance with Seneca's
  * Academic Integrity Policy:
  *
  * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
  *
-<<<<<<< HEAD
-<<<<<<< HEAD
  * Name: Julia Alekseev Student ID: 051292134 Date: Nov 29, 2023
-=======
- * Name: Julia Alekseev Student ID: 051292134 Date: Nov 22, 2023
->>>>>>> parent of 6bd6358 (a6 complete)
-=======
- * Name: Julia Alekseev Student ID: 051292134 Date: Nov 22, 2023
->>>>>>> parent of 6bd6358 (a6 complete)
  *
  * Published URL: https://dull-red-lovebird-shoe.cyclic.app/
  ********************************************************************************/
