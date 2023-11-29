@@ -6,7 +6,7 @@
  *
  * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
  *
- * Name: Julia Alekseev Student ID: 051292134 Date: Nov 19, 2023
+ * Name: Julia Alekseev Student ID: 051292134 Date: Nov 22, 2023
  *
  * Published URL: https://dull-red-lovebird-shoe.cyclic.app/
  ********************************************************************************/
@@ -25,7 +25,13 @@ app.set("view engine", "ejs");
 // static files from the public directory
 app.use(express.static("public"));
 
-app.use(express.urlencoded({ extended: true }));
+//multer
+const multer = require("multer");
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+
+app.use(upload.any()); //for files
+app.use(express.urlencoded({ extended: true })); //for text
 
 ///////////// INIT ALL LEGOS/////////////////////////
 // init LEGO data
@@ -132,6 +138,8 @@ app.get("/lego/addSet", (req, res) => {
 //posting new set
 app.post("/lego/addSet", (req, res) => {
   const setData = req.body;
+  const files = req.files;
+
   legoData
     .addSet(setData)
     .then(() => {
