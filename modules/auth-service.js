@@ -37,10 +37,10 @@ const db = mongoose.connection;
 
 // connecting to db
 mongoose.connect(process.env.MONGODB, {
-  useCreateIndex: true,
+  useCreateIndex: true, // Recommended to handle deprecation of ensureIndex
 });
 
-// user const connect to mongo and schema
+// user const connected to mongo and schema
 let User = mongoose.model("User", userSchema);
 
 // init mongo
