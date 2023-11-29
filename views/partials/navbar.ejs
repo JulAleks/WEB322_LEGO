@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 <!--********************************************************************************
  * WEB322 – Assignment 06
  *
@@ -13,40 +11,81 @@
  * Published URL: https://dull-red-lovebird-shoe.cyclic.app/
  ********************************************************************************-->
 
-=======
->>>>>>> parent of 6bd6358 (a6 complete)
-=======
->>>>>>> parent of 6bd6358 (a6 complete)
 <%//NAV BAR%>
 
 <div class="navbar bg-base-100">
   <div class="flex-1">
     <a
-      class="btn btn-ghost normal-case text-xl <%= (page === '/') ? 'active' : '' %>"
+      class="btn btn-ghost normal-case text-xl <%= (page === 'home') ? 'active' : '' %>"
       href="/"
       >LEGO Collection</a
     >
   </div>
-
   <div class="navbar-center hidden sm:flex">
     <ul class="menu menu-horizontal px-1">
       <li>
-        <a class="<%= (page === 'about') ? 'active' : '' %>" href="/about"
+        <a class="<%= (page === '/about') ? 'active' : '' %>" href="/about"
           >About</a
         >
       </li>
       <li>
-        <a class="<%= (page === 'sets') ? 'active' : '' %>" href="/lego/sets"
+        <a class="<%= (page === '/sets') ? 'active' : '' %>" href="/lego/sets"
           >View Collection</a
         >
       </li>
+      <% if (session.user) { %>
       <li>
-        <a
-          class="<%= (page === 'addSet') ? 'active' : '' %>"
-          href="/lego/addSet"
-          >Add LEGO Set</a
-        >
+        <details>
+          <summary>
+            Account:<span class="ml-2 text-base font-semibold text-neutral-500"
+              ><%= session.user.userName %></span
+            >
+          </summary>
+          <ul class="p-2 right-0">
+            <li>
+              <a
+                class="<%= (page === 'lego/addSet') ? 'active' : '' %>"
+                href="/lego/addSet"
+                >Add to Collection</a
+              >
+            </li>
+            <li>
+              <a
+                class="<%= (page === '/userHistory') ? 'active' : '' %>"
+                href="/userHistory"
+                >User History</a
+              >
+            </li>
+            <li>
+              <a href="/logout">Log Out</a>
+            </li>
+          </ul>
+        </details>
       </li>
+
+      <% } else { %>
+      <li>
+        <details>
+          <summary>Account</summary>
+          <ul class="p-2 bg-base-100 right-0">
+            <li>
+              <a
+                class="<%= (page === '/login') ? 'active' : '' %>"
+                href="/login"
+                >Login</a
+              >
+            </li>
+            <li>
+              <a
+                class="<%= (page === '/register') ? 'active' : '' %>"
+                href="/register"
+                >Register</a
+              >
+            </li>
+          </ul>
+        </details>
+      </li>
+      <% } %>
     </ul>
   </div>
 </div>

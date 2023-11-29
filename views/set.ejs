@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 <!--********************************************************************************
  * WEB322 – Assignment 06
  *
@@ -12,10 +10,6 @@
  *
  * Published URL: https://dull-red-lovebird-shoe.cyclic.app/
  ********************************************************************************-->
-=======
->>>>>>> parent of 6bd6358 (a6 complete)
-=======
->>>>>>> parent of 6bd6358 (a6 complete)
 <%- include('partials/header') %>
 <%= console.log(set) %>
 
@@ -25,7 +19,7 @@
         .then((response) => response.json())
         .then((data) => {
           const quoteElement = document.getElementById("quote");
-          quoteElement.innerHTML = `"${data.content}" <br /> - ${data.author}`;
+          quoteElement.innerHTML = `"${data.content}"<br> - ${data.author}`;
         })
         .catch((error) => {
           console.error("Failed to fetch the random quote:", error);
@@ -35,7 +29,7 @@
   
 <body>
   <%- include('partials/navbar', {page: '/set'}) %>
-  <br />
+ <br>
 
   <div class="container mx-auto p-4">
 
@@ -48,28 +42,30 @@
       </div>
     </div>
   
-    <br />
+   <br>
   
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-
-    <div class="card card-compact w-96 bg-base-100 shadow-xl border-2">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
         <img class="w-full rounded-lg" src='<%= set.img_url %>' alt="Set Image" /></div>
 
     <div class="prose">
       <p>
-        <span class="font-bold">Set Name: </span> <%= set.name %> <br />
-        <span class="font-bold">Year Released: </span> <%= set.year %> <br />
-        <span class="font-bold">Theme: </span> <%= set['Theme.name']%> <br />
-        <span class="font-bold">Number of Parts: </span> <%= set.num_parts %> <br /><br />
+        <span class="font-bold">Set Name: </span> <%= set.name %><br>
+        <span class="font-bold">Year Released: </span> <%= set.year %><br>
+        <span class="font-bold">Theme: </span> <%= set['Theme.name'] %><br>
+        <span class="font-bold">Number of Parts: </span> <%= set.num_parts %><br><br />
         <span id="quote"></span>
-        <br /><br />
-        <a class="btn btn-success btn-sm" href="#" onclick="location.href='/lego/editSet/<%= set.set_num %> '">EDIT SET: <%= set.name %></a>
-        <a class="btn btn-primary btn-sm" href="#" onclick="history.back(); return false;">RETURN</a>   
+       <br><br />
+        <% if (session.user) { %>
+          <a class="btn btn-success btn-sm" href="#" onclick="location.href='/lego/editSet/<%= set.set_num %> '">EDIT SET: <%= set.name %></a>
+          <a class="btn btn-primary btn-sm" href="#" onclick="history.back(); return false;">RETURN</a>
+        <% } else { %>
+          <a class="btn btn-primary btn-sm" href="#" onclick="history.back(); return false;">RETURN</a>
+        <% } %>
       </p>
+      
     </div>
   </div>
-</div>
 
   </body>
   
