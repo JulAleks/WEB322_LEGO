@@ -111,8 +111,9 @@ app.post("/register", (req, res) => {
 
 ///////////// INIT ALL LEGOS/////////////////////////
 // init LEGO data
-legoData.initialize().then(
-  authData.initialize
+legoData.initialize().then(() => {
+  authData
+    .initialize()
     .then(() => {
       console.log("LEGO data initialized!");
     })
@@ -125,8 +126,8 @@ legoData.initialize().then(
             "Apologies, but it seems the raccoons have orchestrated a LEGO heist, leaving your digital bricks in the paws of mischief, rendering initialization impossible - those crafty bandits are building their own raccoon metropolis!",
         });
       }
-    })
-);
+    });
+});
 
 ///////PAGES////////////
 
