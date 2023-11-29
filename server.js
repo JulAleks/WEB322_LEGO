@@ -119,7 +119,6 @@ legoData
   })
   .catch((error) => {
     console.error("No LEGO for YOU!", error.message);
-    // Redirect the user or send a response based on the error
     if (error.message.includes("raccoons")) {
       res.status(404).render("404", {
         message:
