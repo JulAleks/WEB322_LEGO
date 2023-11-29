@@ -37,8 +37,7 @@ const db = mongoose.connection;
 
 // connecting to db
 mongoose.connect(process.env.MONGODB, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 
 // user const connect to mongo and schema
