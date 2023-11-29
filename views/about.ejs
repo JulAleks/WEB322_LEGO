@@ -1,14 +1,28 @@
+<!--********************************************************************************
+ * WEB322 – Assignment 06
+ *
+ * I declare that this assignment is my own work in accordance with Seneca's
+ * Academic Integrity Policy:
+ *
+ * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
+ *
+ * Name: Julia Alekseev Student ID: 051292134 Date: Nov 29, 2023
+ *
+ * Published URL: https://dull-red-lovebird-shoe.cyclic.app/
+ ********************************************************************************-->
+
 <%- include('partials/header') %>  
 
-<body>
+<body tabindex="-1">
 
   <%- include('partials/navbar', {page: '/about'}) %>
 
-  <br />
-
-  <div class="container mx-auto">
+<br>
+  
+  <div class="container mx-auto p-4">
+    
     <div class="hero bg-base-200 rounded-lg p-6">
-      <div class="hero-content text-center ">
+      <div class="hero-content text-center">
         <div class="max-w-md">
           <h1 class="text-5xl font-bold">About me</h1>
 
@@ -19,9 +33,9 @@
       </div>
     </div>
 
-    <br />
-
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+    <br>
+  
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div>
 
         <div class="card bg-base-100 shadow">
