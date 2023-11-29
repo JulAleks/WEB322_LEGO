@@ -6,7 +6,7 @@
  *
  * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
  *
- * Name: Julia Alekseev Student ID: 051292134 Date: Nov 28, 2023
+ * Name: Julia Alekseev Student ID: 051292134 Date: Nov 29, 2023
  *
  * Published URL: https://dull-red-lovebird-shoe.cyclic.app/
  ********************************************************************************/
@@ -32,23 +32,21 @@ let userSchema = new Schema({
 });
 
 /////////////////CONNECTION/////////////////////////
-//const for connection
+// const for connection
 const db = mongoose.connection;
 
-//connecting to db
+// connecting to db
 mongoose.connect(process.env.MONGODB, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-//user const connected to mongo and schema
-const User = mongoose.model("User", userSchema);
+// user const connect to mongo and schema
+let User = mongoose.model("User", userSchema);
 
-//init monogo
-module.exports.initialize = function () {
-  return new Promise(function (resolve, reject) {
-    const db = mongoose.connection;
-
+// init mongo
+module.exports.initialize = () => {
+  return new Promise((resolve, reject) => {
     db.on("error", (err) => {
       reject(err);
     });
@@ -93,8 +91,8 @@ module.exports.registerUser = (userData) => {
 
 //////////////////////////////USER CHECKER//////////////////////////////////////
 
-module.exports.checkUser = function (userData) {
-  return new Promise(function (resolve, reject) {
+module.exports.checkUser = (userData) => {
+  return new Promise((resolve, reject) => {
     console.log("User Agent in checkUser:", userData.userAgent);
     User.find({ userName: userData.userName })
       .exec()
@@ -112,12 +110,12 @@ module.exports.checkUser = function (userData) {
                   "Password fail for raccoon operative: " + userData.userName
                 );
               } else {
-                const newLoginHistoryEntry = {
+                const newHistory = {
                   dateTime: new Date().toString(),
                   userAgent: userData.userAgent,
                 };
 
-                users[0].loginHistory.push(newLoginHistoryEntry);
+                users[0].loginHistory.push(newHistory);
 
                 User.updateOne(
                   { userName: users[0].userName },
