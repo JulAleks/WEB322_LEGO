@@ -7,7 +7,11 @@
  * https://www.senecacollege.ca/about/policies/academic-integrity-policy.html
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Name: Julia Alekseev Student ID: 051292134 Date: Nov 29, 2023
+=======
+ * Name: Julia Alekseev Student ID: 051292134 Date: Nov 22, 2023
+>>>>>>> parent of 6bd6358 (a6 complete)
 =======
  * Name: Julia Alekseev Student ID: 051292134 Date: Nov 22, 2023
 >>>>>>> parent of 6bd6358 (a6 complete)
